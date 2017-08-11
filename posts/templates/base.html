@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title_content %} {% en %}</title>
+    <style type="text/css" >
+        .msg-success{
+            background: #44ff9e;
+            padding: 10px;
+            border: 2px solid #30b671;
+        }
+        .titulo_post{
+            background: #626262;
+            padding: 5px;
+            margin: 0;
+
+        }
+        .titulo_post a {
+            text-decoration: none;
+            color: black;
+        }
+        .titulo_post a:hover{
+            color: #FFFFFF;
+        }
+        .paragrafo{
+            padding: 20px;
+        }
+        a{
+            text-decoration: none;
+
+        }
+    </style>
+</head>
+<body>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+<div class="container">
+    {% block container %}
+
+        <h1>{{ title }} is Working!</h1>
+        <p>Block container</p>
+        <h3>{{ numero }}</h3>
+        <a href="{% url 'posts:create' %}">Create New Post</a>
+
+        {% for post in posts%}
+        <div style="background-color:#f2f2f2; margin: 10px; padding: 5px;">
+            <h1 class="titulo_post"><a href="{% url 'posts:update' id=post.id %}">{{ post.title}}</a><br></h1>
+            <p class="paragrafo">{{ post.content}}<br/></p>
+            {{ post.pk}}<br/>
+        </div>
+        {% endfor%}
+
+
+
+    {% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <h1>Criar Novo Post</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+        {% if instance %}
+            <button type="submit" formaction="{% url 'posts:delete' id=instance.id %}">Excluir</button>
+        {% endif %}
+    </form>
+    <pre>
+	{{ instance.fields }}
+</pre>
+{% endblock container %}
