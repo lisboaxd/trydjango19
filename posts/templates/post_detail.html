@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title_content %}{{ post.title }} | {{ block.super }} {% endblock title_content %}
 {% block container %}
 	<h1>{{ post.title}}</h1>
 	<h4>{{ post.created }}</h4>

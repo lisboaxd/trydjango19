@@ -3,6 +3,7 @@
 <head>
 	<title>{% block title_content %} Try Django 1.9 {% endblock title_content %}</title>
     <style type="text/css" >
+        {% block style %}
         .msg-success{
             background: #44ff9e;
             padding: 10px;
@@ -28,6 +29,7 @@
             text-decoration: none;
 
         }
+        {% endblock style %}
     </style>
 </head>
 <body>
