@@ -9,22 +9,26 @@ h1{
 {% endblock style %}
 </style>
 {% block container %}
-    <form>
+    <form method="post" action="">
+
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
+
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
+
         <div class="form-check">
             <label class="form-check-label">
                 <input type="checkbox" class="form-check-input">
                 Check me out
             </label>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -35,8 +39,11 @@ h1{
     <h1>{{ title }}</h1>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-
+        <div class="form-group">
+            <label for="id_title">Título</label>
+            {{ form.title }}
+        </div>
+        {{ form.content }}
         <input class="btn btn-outline-primary" type="submit" value="{{ title }}">
         {% if instance %}
             <button type="submit"  class="btn btn-outline-danger" formaction="{% url 'posts:delete' id=instance.id %}">Excluir</button>
