@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title_content %}{{ post.title }} | {{ block.super }} {% endblock title_content %}
 {% block container %}
-	<h1>{{ post.title}}</h1>
-	<h4>{{ post.created }}</h4>
-	<p> {{ post.content }}</p>
+	<h1>{{ post.title}}</h1><small>{{ post.created|date:"d/m/y H:i:s" }}</small>
+	<p> {{ post.content | linebreaks }}</p>
 {% endblock container %}

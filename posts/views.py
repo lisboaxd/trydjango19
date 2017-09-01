@@ -50,7 +50,7 @@ def posts_update(request,id=None):
 		return HttpResponseRedirect(instance.get_absolute_url())
 	context = {
 		'form':form,
-		'title':'Create',
+		'title':'Editar',
 		'instance':instance
 	}
 	return render(request,'post_form.html',context)

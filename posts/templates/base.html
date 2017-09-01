@@ -1,36 +1,13 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>{% block title_content %} Try Django 1.9 {% endblock title_content %}</title>
-    <style type="text/css" >
-        {% block style %}
-        .msg-success{
-            background: #44ff9e;
-            padding: 10px;
-            border: 2px solid #30b671;
-        }
-        .titulo_post{
-            background: #626262;
-            padding: 5px;
-            margin: 0;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-        }
-        .titulo_post a {
-            text-decoration: none;
-            color: black;
-        }
-        .titulo_post a:hover{
-            color: #FFFFFF;
-        }
-        .paragrafo{
-            padding: 20px;
-        }
-        a{
-            text-decoration: none;
 
-        }
-        {% endblock style %}
-    </style>
+    <link rel="stylesheet" href="{% static 'posts/teste.css' %}">
+
 </head>
 <body>
         {% if messages %}
@@ -40,27 +17,32 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
+        <a href="{% url 'posts:list' %}">Logo</a>
 <div class="container">
     {% block container %}
 
         <h1>{{ title }} is Working!</h1>
-        <p>Block container</p>
         <h3>{{ numero }}</h3>
-        <a href="{% url 'posts:create' %}">Create New Post</a>
+        <a href="{% url 'posts:create' %}" class="btn btn-warning">Create New Post</a>
 
         {% for post in posts%}
-        <div style="background-color:#f2f2f2; margin: 10px; padding: 5px;">
-            <h1 class="titulo_post"><a href="{% url 'posts:update' id=post.id %}">{{ post.title}}</a><br></h1>
-            <p class="paragrafo">{{ post.content}}<br/></p>
-            {{ post.pk}}<br/>
+        <div class="card" style="width: 20rem; margin: 10px;">
+            <div class="card-body">
+                <h4 class="card-title"><a href="{% url 'posts:detail' id=post.id %}">{{ post.title}}</a></h4>
+                <p class="card-text">{{ post.content | linebreaks | truncatechars:80 }}</p>
+                <a href="{% url 'posts:update' id=post.id %}" class="btn btn-primary">Go Editar</a>
+            </div>
         </div>
         {% endfor%}
 
-
-
     {% endblock %}
 </div>
-
 </body>
 </html>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
