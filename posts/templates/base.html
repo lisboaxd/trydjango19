@@ -30,12 +30,45 @@
             <div class="card-body">
                 <h4 class="card-title"><a href="{% url 'posts:detail' id=post.id %}">{{ post.title}}</a></h4>
                 <p class="card-text">{{ post.content | linebreaks | truncatechars:80 }}</p>
-                <a href="{% url 'posts:update' id=post.id %}" class="btn btn-primary">Go Editar</a>
+                <a href="{% url 'posts:update' id=post.id %}" class="btn btn-primary">Editar</a>
             </div>
         </div>
         {% endfor%}
 
     {% endblock %}
+
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if posts.has_previous %}#}
+{#            <a href="?pagina={{ posts.previous_page_number }}" class="btn btn-warning">Anterior</a>#}
+{#        {% endif %}#}
+{##}
+{#        <span class="current">#}
+{#            Página {{ posts.number }} de {{ posts.paginator.num_pages }}#}
+{#        </span>#}
+{##}
+{#        {% if posts.has_next %}#}
+{#            <a href="?pagina={{ posts.next_page_number }}" class="btn btn-warning">Próxima</a>#}
+{#        {% endif %}#}
+{#    </span>#}
+{#</div>#}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+      {% if posts.has_previous %}
+          <li class="page-item"><a href="?pagina={{ posts.previous_page_number }}" class="page-link">Anterior</a></li>
+      {% endif %}
+        {% for i in posts.count  %}
+            <li>{{ i.number }}</li>
+        {% endfor %}
+
+      <li class="page-item"><a href="?pagina={{ posts }}" class="page-link">{{ posts }}</a></li>
+      {% if posts.has_next %}
+        <li class="page-item"><a class="page-link" href="?pagina={{ posts.next_page_number }}">Próxima</a></li>
+      {% endif %}
+  </ul>
+</nav>
+
 </div>
 </body>
 </html>
